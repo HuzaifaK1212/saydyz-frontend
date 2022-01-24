@@ -1,0 +1,83 @@
+.custom-row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.custom-size {
+  transform: scale(1.2);
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.row {
+  display: flex;
+}
+
+.custom-input {
+  transform: scale(1.2);
+  margin-top: 1vw;
+  margin-right: 20vw;
+  width: 30vw;
+  margin-bottom: 1vw;
+}
+
+.label {
+  margin-left: 5vw;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.full-width {
+  width: 30vw;
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.half-width {
+  width: 15vw;
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.quarter-width {
+  width: 4vw;
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 1vw;
+  margin-right: 0;
+}
+
+.image {
+  background-image: url("/assets/saydyz-back.jpg");
+  background-repeat: no-repeat;
+}
+
+.mat-card {
+  margin-top: 5vw;
+  margin-bottom: 5vw;
+  margin-right: 5vw;
+  margin-left: 5vw;
+  background-color: #fec400;
+}
+
+.button {
+  color: black;
+  background-color: #ffeb32;
+  margin-top: 15px;
+  margin-left: 10px;
+  transform: scale(1.2);
+}
+
+::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: transparent !important;;
+ }
+
+ ::ng-deep .mat-form-field-label {
+  /*change color of label*/
+  color: black !important;
+  font-weight: normal !important;
+ }
