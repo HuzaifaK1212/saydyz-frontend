@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
   mainForm!: FormGroup;
   items!: FormArray;
   orders!: Order[];
+  promoItems! : Order[];
   numPattern = '^[0-9]+$';
 
   constructor(private formBuilder: FormBuilder) {}
@@ -26,6 +27,8 @@ export class AppComponent implements OnInit {
     { value: 1, displayValue: 'Individual' },
     { value: 2, displayValue: 'Retailer' },
   ];
+
+  genders: string[] = ['Male', 'Female'];
 
   icicles: Icicle[] = [
     { Id: 1, flavorName: 'Falsa Black Salt', price: 250 },
@@ -75,8 +78,8 @@ export class AppComponent implements OnInit {
       totalPrice: [''],
       discount: [''],
       salePrice: [''],
+      deliveryCharge: [''],
     });
-
   }
 
   get icicleItemsFormArray() {
@@ -85,6 +88,30 @@ export class AppComponent implements OnInit {
 
   get tubItemsFormArray() {
     return this.mainForm.get('tubItems') as FormArray;
+  }
+
+  promoClick(limit: number) {
+    this.items = this.mainForm.get('icicleItems') as FormArray;
+    for (let i = 0; i < limit; i++) {
+      if (i == limit - 1) {
+        this.items.push(
+          this.formBuilder.group({
+            quantity: 1,
+            price: [{value: 0, disabled: true}],
+            flavorId: 0,
+          })
+        );
+      }
+      else {
+        this.items.push(
+          this.formBuilder.group({
+            quantity: 1,
+            price: 0,
+            flavorId: 0,
+          })
+        );
+      }
+    }
   }
 
   addIcicle() {
@@ -151,7 +178,8 @@ export class AppComponent implements OnInit {
   }
 
   onTotal() {
-    let total = 0, sale = 0;
+    let total = 0,
+      sale = 0;
     var icicles = this.mainForm.get('icicleItems') as FormArray;
     if (icicles.length > 0) {
       for (let control of icicles.controls) {
@@ -159,19 +187,19 @@ export class AppComponent implements OnInit {
       }
     }
     var tubs = this.mainForm.get('tubItems') as FormArray;
-    if(tubs.length > 0) {
+    if (tubs.length > 0) {
       for (let control of tubs.controls) {
         total += control.value.price ?? 0;
       }
     }
     let disc = this.mainForm.get('discount')?.value;
-    if(disc > 0) {
+    if (disc > 0) {
       let discountDeduction = (total / 100) * disc;
       sale = total - discountDeduction;
     }
-      this.mainForm.patchValue({
+    this.mainForm.patchValue({
       totalPrice: total,
-      salePrice: sale
+      salePrice: sale,
     });
   }
   title = 'saydyz-frontend';
