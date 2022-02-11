@@ -3,12 +3,19 @@
   display: flex;
   flex-direction: row;
   margin-left: 30px;
+  justify-content: space-between;
+}
+
+.custom {
+  justify-content: space-between;
 }
 
 .custom-size {
+  font-weight: bold;
   transform: scale(1.2);
-  margin-left: 20px;
-  margin-right: 20px;
+  // margin-left: 20px;
+  // margin-right: 20px;
+  text-align: left;
 }
 
 .row {
@@ -45,10 +52,10 @@
 
 .quarter-width {
   align-content: flex-start;
-  width: 4vw;
-  font-size: 16px;
+  width: 5vw;
+  font-size: 15px;
   font-weight: bold;
-  margin-left: 1vw;
+  // margin-left: 1vw;
 }
 
 .image {
@@ -56,13 +63,7 @@
   background-repeat: no-repeat;
 }
 
-.mat-card {
-  margin-top: 5vw;
-  margin-bottom: 5vw;
-  margin-right: 5vw;
-  margin-left: 5vw;
-  background-color: #fec400;
-}
+
 
 .button {
   color: black;
@@ -78,9 +79,17 @@
  ::ng-deep .mat-form-field-label {
   /*change color of label*/
   color: black !important;
+  background-color: transparent !important;
   font-weight: normal !important;
  }
 
  .mat-grid-tile {
   // border: solid 2px #000;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px #f3c30e inset !important;
 }

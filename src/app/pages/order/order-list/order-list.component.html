@@ -1,0 +1,80 @@
+<mat-card class="mat-card">
+  <mat-card-header>
+    <mat-card-title>
+      <h1>Order List</h1>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <hr style="border-color: black;">
+    <table mat-table [dataSource]="dataSource" class="table">
+
+      <!--- Note: These columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- S.No Column -->
+      <ng-container matColumnDef="sNo">
+        <th mat-header-cell *matHeaderCellDef>
+          S.No
+        </th>
+        <!-- <td mat-cell *matCellDef="let row; let i = index;"> -->
+        <td mat-cell *matCellDef="let element; let i = index;">
+          {{ i + 1 }}
+          <!-- {{ element?.id}} -->
+        </td>
+      </ng-container>
+
+      <!-- Order No (OrderCode) -->
+      <ng-container matColumnDef="orderNo">
+        <th mat-header-cell *matHeaderCellDef> Order No. </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element?.orderCode || "NA" }}
+        </td>
+      </ng-container>
+
+      <!-- Customer Name -->
+      <ng-container matColumnDef="customerName">
+        <th mat-header-cell *matHeaderCellDef> Customer Name </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element?.customer?.name || "NA" }}
+        </td>
+      </ng-container>
+
+      <!-- Customer Gender -->
+      <ng-container matColumnDef="customerGender">
+        <th mat-header-cell *matHeaderCellDef> Customer Gender </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element?.customer?.gender || "NA" }}
+        </td>
+      </ng-container>
+
+      <!-- Customer Type -->
+      <ng-container matColumnDef="customerType">
+        <th mat-header-cell *matHeaderCellDef> Customer Type </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element?.customer?.customerTypeId == 1 ? "Individual" : "Retailer" || "NA" }}
+        </td>
+      </ng-container>
+
+      <!-- Phone No -->
+      <ng-container matColumnDef="phoneNo">
+        <th mat-header-cell *matHeaderCellDef> Phone No </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element?.customer?.phoneNo || "NA" }}
+        </td>
+      </ng-container>
+
+      <!-- Address -->
+      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef> Address </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element?.customer?.address || "NA" }}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-card-content>
+  <mat-card-actions>
+  </mat-card-actions>
+</mat-card>

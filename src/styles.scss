@@ -1,5 +1,93 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
+.page-cs-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(229, 239, 242, 0.95);
+  // z-index         : 20;
+  z-index: 1040;
+}
+
+.page-cs-loader img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -50px 0 0 -50px;
+}
+
+.page-cs-loader mat-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -50px 0 0 -50px;
+}
+
+.mat-card {
+  margin-top: 5vw;
+  margin-bottom: 5vw;
+  margin-right: 5vw;
+  margin-left: 5vw;
+  background-color: #fec400;
+}
+
+.mat-header-cell {
+  padding: 0px 10px 0px 10px !important;
+  white-space: nowrap !important;
+  text-align: left !important;
+  font-style: normal !important;
+  font-weight: bold !important;
+  font-size: 16px !important;
+  color: rgb(0, 0, 0) !important;
+  background-color: #fec400;
+}
+
+.mat-cell {
+  padding: 0px 10px 0px 10px !important;
+  white-space: nowrap !important;
+  text-align: left !important;
+  font-style: normal !important;
+  font-weight: bold !important;
+  font-size: 14px !important;
+  color: rgb(0, 0, 0) !important;
+  background-color: #fec400;
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar,
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: black;
+}
+
+.mat-tab-label .mat-tab-label-content {
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    color: black;
+    font-size: 18px;
+}
+
+.mat-grid-tile-content {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-between !important;
+    height: 100%;
+    padding: 0px 10px 0px 10px !important;
+    margin: 0;
+}

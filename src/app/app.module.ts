@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -13,10 +13,19 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { OrderService } from './services/order/order.service';
+import { HttpClientModule } from '@angular/common/http';
+import { ServiceModule } from './service.module';
+import { PageLoaderComponent } from './services/pageLoader/pageLoader.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { OrderListComponent } from './pages/order/order-list/order-list.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PageLoaderComponent,
+    OrderListComponent
   ],
   imports: [
     BrowserModule,
@@ -31,8 +40,12 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatNativeDateModule,
     MatSelectModule,
     MatButtonModule,
-    MatGridListModule
-  ],
+    MatGridListModule,
+    ServiceModule,
+    MatTabsModule,
+    MatTableModule
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
 })

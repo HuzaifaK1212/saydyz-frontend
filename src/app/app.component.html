@@ -4,220 +4,228 @@
       <img src="/assets/saydyz-back.jpg" class="img-responsive" style="height: 20vw; width: 40vw;">
     </div>
   </div>
-  <form [formGroup]="mainForm">
-    <mat-card class="mat-card">
-      <mat-card-header>
-        <mat-card-title>
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
+  <mat-tab-group>
+    <mat-tab label="Order Form">
+      <form [formGroup]="mainForm">
+        <mat-card class="mat-card">
+          <mat-card-header>
+            <mat-card-title>
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
 
-        <!-- Top Head items -->
-        <mat-grid-list cols="20" rowHeight="65px" gutterSize="6px">
-          <mat-grid-tile colspan="3">
-            <!-- Order Id -->
-            <div class="col-xs-6" class="">
-              <h3>Order ID:</h3>
-            </div>
-            <div class="col-xs-6">
-              <mat-form-field class="quarter-width">
-                <input type="text" [readonly]="true" formControlName="orderId" matInput>
-              </mat-form-field>
-            </div>
-          </mat-grid-tile>
+            <!-- Top Head items -->
+            <mat-grid-list cols="20" rowHeight="65px" gutterSize="6px">
+              <mat-grid-tile colspan="3">
+                <!-- Order Id -->
+                <div class="col-xs-6" class="">
+                  <!-- <h3 class="h3">Order ID:</h3> -->
+                  <label for="orderId" class="label">Order ID: </label>
+                </div>
+                <div class="col-xs-6">
+                  <mat-form-field class="quarter-width">
+                    <input type="text" [readonly]="true" formControlName="orderId" matInput>
+                  </mat-form-field>
+                </div>
+              </mat-grid-tile>
 
-          <!-- Date Picker -->
-          <mat-grid-tile colspan="3">
-            <div class="col-xs-12">
-              <mat-form-field class="quarter-width" style="width: 10vw;">
-                <mat-label>Choose a Date</mat-label>
-                <input matInput formControlName="orderDate" [matDatepicker]="picker">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-              </mat-form-field>
-            </div>
-          </mat-grid-tile>
+              <!-- Date Picker -->
+              <mat-grid-tile colspan="3">
+                <div class="col-xs-12">
+                  <mat-form-field class="quarter-width" style="width: 10vw;">
+                    <mat-label>Choose a Date</mat-label>
+                    <input matInput formControlName="orderDate" [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </mat-grid-tile>
 
-          <mat-grid-tile colspan="3"></mat-grid-tile>
+              <mat-grid-tile colspan="3"></mat-grid-tile>
 
-          <mat-grid-tile colspan="2">
+              <mat-grid-tile colspan="2">
 
-            <!-- Total Price -->
-            <label for="totalPrice" class="label">Total: </label>
-            <mat-form-field class="quarter-width">
-              <!-- <input type="text" formControlName="totalPrice" [readonly]="true" matInput> -->
-              <input type="text" formControlName="totalPrice" matInput>
-            </mat-form-field>
-          </mat-grid-tile>
-
-          <mat-grid-tile colspan="3">
-            <!-- Discount -->
-            <label for="discount" class="label">Discount</label>
-            <mat-form-field class="quarter-width">
-              <input type="number" formControlName="discount" [pattern]="numPattern" matInput>
-            </mat-form-field>
-          </mat-grid-tile>
-
-          <mat-grid-tile colspan="3">
-            <!-- Delivery Charges -->
-            <label for="deliveryCharge" class="label">Delivery: </label>
-            <mat-form-field class="quarter-width">
-              <!-- <input type="text" formControlName="totalPrice" [readonly]="true" matInput> -->
-              <input type="text" formControlName="deliveryCharge" matInput>
-            </mat-form-field>
-          </mat-grid-tile>
-
-          <mat-grid-tile colspan="3">
-
-            <!-- Sale Price -->
-            <label for="salePrice" class="label">Sale Price</label>
-            <mat-form-field class="quarter-width">
-              <!-- <input type="text" formControlName="salePrice" [readonly]="true" matInput> -->
-              <input type="text" formControlName="salePrice" matInput>
-            </mat-form-field>
-          </mat-grid-tile>
-        </mat-grid-list>
-
-        <!-- Buttons  -->
-        <mat-grid-list cols="12" rowHeight="50px" gutterSize="6px">
-          <mat-grid-tile colspan="10"></mat-grid-tile>
-
-          <mat-grid-tile colspan="1">
-            <div class="col-xs-6">
-              <button mat-raised-button class="button" (click)="onTotal()">Total</button>
-            </div>
-          </mat-grid-tile>
-
-          <mat-grid-tile colspan="1">
-            <div class="col-xs-6">
-              <button mat-raised-button class="button">Save</button>
-            </div>
-          </mat-grid-tile>
-
-
-        </mat-grid-list>
-
-        <hr style="border-color: black;">
-
-        <br><br>
-        <!-- Customer Details Grid -->
-        <mat-grid-list cols="2" rowHeight="50px" gutterSize="6px">
-          <mat-grid-tile>
-            <!-- Customer Name Row -->
-            <div class="custom-row">
-              <div class="col-xs-6">
-                <label for="customerName" class="label">Customer Name</label>
-                <mat-form-field class="full-width">
-                  <input type="text" formControlName="customerName" matInput>
+                <!-- Total Price -->
+                <label for="totalPrice" class="label">Total: </label>
+                <mat-form-field class="quarter-width">
+                  <input type="text" formControlName="totalPrice" [readonly]="true" matInput>
+                  <!-- <input type="text" formControlName="totalPrice" matInput> -->
                 </mat-form-field>
-              </div>
-            </div>
-          </mat-grid-tile>
+              </mat-grid-tile>
 
-          <mat-grid-tile>
-
-            <!-- Phone No Row -->
-            <div class="custom-row">
-              <div class="col-sm-6">
-                <label for="phoneNo" class="label">Phone No</label>
-                <mat-form-field class="full-width">
-                  <input type="text" formControlName="phoneNo" matInput>
+              <mat-grid-tile colspan="3">
+                <!-- Discount -->
+                <label for="discount" class="label">Discount</label>
+                <mat-form-field class="quarter-width">
+                  <input type="number" min="0" formControlName="discount" [pattern]="numPattern" matInput>
                 </mat-form-field>
-              </div>
-            </div>
-          </mat-grid-tile>
+              </mat-grid-tile>
 
-          <mat-grid-tile>
-
-            <!-- Customer Gender Row -->
-            <div class="custom-row">
-              <div class="col-xs-6">
-                <label for="gender" class="label">Gender</label>
-                <mat-form-field class="full-width">
-                  <mat-select>
-                    <mat-option *ngFor="let gender of genders" [value]="gender">
-                      {{gender}}
-                    </mat-option>
-                  </mat-select>
+              <mat-grid-tile colspan="3">
+                <!-- Delivery Charges -->
+                <label for="deliveryCharge" class="label">Delivery: </label>
+                <mat-form-field class="quarter-width">
+                  <!-- <input type="text" formControlName="totalPrice" [readonly]="true" matInput> -->
+                  <input type="number" min="0" formControlName="deliveryCharge" matInput>
                 </mat-form-field>
-              </div>
-            </div>
-          </mat-grid-tile>
+              </mat-grid-tile>
 
-          <mat-grid-tile>
-            <!-- Address Row -->
-            <div class="custom-row">
-              <div class="col-sm-6">
-                <label for="address" class="label">Address</label>
-                <mat-form-field class="full-width">
-                  <input type="text" formControlName="address" matInput>
+              <mat-grid-tile colspan="3">
+
+                <!-- Sale Price -->
+                <label for="salePrice" class="label">Sale Price</label>
+                <mat-form-field class="quarter-width">
+                  <input type="text" formControlName="salePrice" [readonly]="true" matInput>
+                  <!-- <input type="text" formControlName="salePrice" matInput> -->
                 </mat-form-field>
-              </div>
-            </div>
-          </mat-grid-tile>
+              </mat-grid-tile>
+            </mat-grid-list>
 
-          <mat-grid-tile>
-            <!-- Customer Type Row -->
-            <div class="custom-row">
-              <div class="col-xs-6">
-                <label for="customerType" class="label">Customer Type</label>
-                <mat-form-field class="full-width">
-                  <mat-select>
-                    <mat-option *ngFor="let type of types" [value]="type.value">
-                      {{type.displayValue}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-            </div>
-          </mat-grid-tile>
+            <!-- Buttons  -->
+            <mat-grid-list cols="12" rowHeight="50px" gutterSize="6px">
+              <mat-grid-tile colspan="10"></mat-grid-tile>
 
-          <mat-grid-tile>
-            <!-- Channel Row -->
-            <div class="custom-row">
-              <div class="col-sm-6">
-                <label for="channel" class="label">Channel</label>
-                <mat-form-field class="full-width">
-                  <input type="text" formControlName="channel" matInput>
-                </mat-form-field>
-              </div>
-            </div>
-          </mat-grid-tile>
-        </mat-grid-list>
+              <mat-grid-tile colspan="1">
+                <div class="col-xs-6">
+                  <button mat-raised-button class="button" (click)="onTotal()">Total</button>
+                </div>
+              </mat-grid-tile>
 
-        <br>
-        <br>
-        <hr style="border-color: black;">
-
-        <!-- Icicles Data Row -->
-        <mat-grid-list cols="12" rowHeight="50px" gutterSize="6px">
-          <mat-grid-tile>
-            <div class="custom-row">
-              <div class="col-sm-6">
-                <h2 class="custom-size">Icicles</h2>
-              </div>
-
-            </div>
-          </mat-grid-tile>
-
-          <mat-grid-tile colspan="9"></mat-grid-tile>
-
-          <mat-grid-tile>
-            <div class="col-xs-6">
-              <button mat-raised-button class="button" (click)="promoClick(4)">3 on 1</button>
-            </div>
-          </mat-grid-tile>
-
-          <mat-grid-tile>
-            <div class="col-sm-6">
-              <button mat-raised-button class="button" (click)="addIcicle()">Add</button>
-            </div>
-          </mat-grid-tile>
+              <mat-grid-tile colspan="1">
+                <div class="col-xs-6">
+                  <button mat-raised-button class="button" (click)="onSubmit()">Save</button>
+                </div>
+              </mat-grid-tile>
 
 
-        </mat-grid-list>
-        <!-- Icicle Items -->
-        <!-- <mat-grid-list cols="16" rowHeight="70px" gutterSize="6px">
+            </mat-grid-list>
+
+            <hr style="border-color: black;">
+
+            <br><br>
+            <!-- Customer Details Grid -->
+            <mat-grid-list cols="2" rowHeight="50px" gutterSize="6px">
+
+              <mat-grid-tile>
+                <!-- Customer Name Row -->
+                <!-- <div class="custom-row"> -->
+                <div class="col-xs-3">
+                  <label for="customerName" class="label">Customer Name</label>
+                </div>
+                <div class="col-xs-3">
+                  <mat-form-field class="full-width">
+                    <input type="text" formControlName="customerName" matInput>
+                  </mat-form-field>
+                </div>
+                <!-- </div> -->
+              </mat-grid-tile>
+
+              <mat-grid-tile>
+
+                <!-- Phone No Row -->
+                <div class="custom-row">
+                  <div class="col-sm-6">
+                    <label for="phoneNo" class="label">Phone No</label>
+                    <mat-form-field class="full-width">
+                      <input type="text" formControlName="phoneNo" matInput>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </mat-grid-tile>
+
+              <mat-grid-tile>
+                <!-- Customer Gender Row -->
+
+                <div class="col-xs-3">
+                  <label for="gender" class="label">Gender</label>
+                  <!-- <div class="custom-row"> -->
+                </div>
+                <div class="col-xs-3">
+                  <mat-form-field class="full-width">
+                    <mat-select formControlName="gender">
+                      <mat-option *ngFor="let gender of genders" [value]="gender">
+                        {{gender}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <!-- </div> -->
+              </mat-grid-tile>
+
+              <mat-grid-tile>
+                <!-- Address Row -->
+                <div class="custom-row">
+                  <div class="col-sm-6">
+                    <label for="address" class="label">Address</label>
+                    <mat-form-field class="full-width">
+                      <input type="text" formControlName="address" matInput>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </mat-grid-tile>
+
+              <mat-grid-tile>
+                <!-- Customer Type Row -->
+                  <div class="col-xs-3">
+                    <label for="customerType" class="label">Customer Type</label>
+                    </div>
+                    <div class="col-xs-3">
+                    <mat-form-field class="full-width">
+                      <mat-select formControlName="customerTypeId">
+                        <mat-option *ngFor="let type of types" [value]="type.value">
+                          {{type.displayValue}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+              </mat-grid-tile>
+
+              <mat-grid-tile>
+                <!-- Channel Row -->
+                <div class="custom-row">
+                  <div class="col-sm-6">
+                    <label for="channel" class="label">Channel</label>
+                    <mat-form-field class="full-width">
+                      <input type="text" formControlName="channel" matInput>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </mat-grid-tile>
+            </mat-grid-list>
+
+            <br>
+            <br>
+            <hr style="border-color: black;">
+
+            <!-- Icicles Data Row -->
+            <mat-grid-list cols="12" rowHeight="50px" gutterSize="6px">
+              <mat-grid-tile>
+                <div class="custom-row">
+                  <div class="col-sm-6">
+                    <h2 class="custom-size">Icicles</h2>
+                  </div>
+
+                </div>
+              </mat-grid-tile>
+
+              <mat-grid-tile colspan="9"></mat-grid-tile>
+
+              <mat-grid-tile>
+                <div class="col-xs-6">
+                  <button mat-raised-button class="button" (click)="promoClick(4)">3 on 1</button>
+                </div>
+              </mat-grid-tile>
+
+              <mat-grid-tile>
+                <div class="col-sm-6">
+                  <button mat-raised-button class="button" (click)="addIcicle()">Add</button>
+                </div>
+              </mat-grid-tile>
+
+
+            </mat-grid-list>
+            <!-- Icicle Items -->
+            <!-- <mat-grid-list cols="16" rowHeight="70px" gutterSize="6px">
             <ng-container formArrayName="icicleItems" *ngFor="let item of icicleItemsFormArray.controls; let i = index;">
               <div [formGroupName]="i">
 
@@ -257,91 +265,101 @@
         </mat-grid-list> -->
 
 
-        <div class="custom-row">
-          <div class="col-xs-12">
-            <div formArrayName="icicleItems" *ngFor="let item of icicleItemsFormArray.controls; let i = index;">
-              <div [formGroupName]="i">
-                <div class="row" style="width: 60vw; justify-content: space-around;">
-                  <mat-form-field class="half-width" style="width: 20vw;">
-                    <mat-label>Flavor</mat-label>
-                    <mat-select (selectionChange)="calculatePrice($event.value, i, 1)">
-                      <mat-option *ngFor="let icicle of icicles" [value]="icicle.Id">
-                        {{icicle.flavorName}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                  <mat-form-field class="half-width">
-                    <!-- <input matInput type="number" formControlName="quantity" placeholder="Quantity" (input)="refreshPrice(i, 1)"> -->
-                    <input matInput type="number" formControlName="quantity" placeholder="Quantity">
-                  </mat-form-field>
-                  <mat-form-field class="half-width">
-                    <!-- <input matInput type="text" formControlName="price" placeholder="Price" [readonly]="true"> -->
-                    <input matInput type="text" formControlName="price" placeholder="Price">
-                  </mat-form-field>
-                  <button mat-raised-button style="color: white; background-color: red; transform: scale(0.6);"
-                    type="button" (click)="onDelete(i, 1)">X</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <hr style="border-color: black;">
-        <!-- Tubs Data Row -->
-        <mat-grid-list cols="12" rowHeight="50px" gutterSize="6px">
-          <mat-grid-tile>
             <div class="custom-row">
-              <div class="col-sm-6">
-                <h2 class="custom-size">Tubs</h2>
-              </div>
-
-            </div>
-          </mat-grid-tile>
-
-          <mat-grid-tile colspan="10"></mat-grid-tile>
-
-          <mat-grid-tile>
-            <div class="col-sm-6">
-              <button mat-raised-button class="button" (click)="addTub()">Add</button>
-            </div>
-          </mat-grid-tile>
-        </mat-grid-list>
-
-        <div class="custom-row">
-          <div class="col-xs-12">
-            <div formArrayName="tubItems" *ngFor="let item of tubItemsFormArray.controls; let i = index;">
-              <div [formGroupName]="i">
-                <div class="row" style="width: 60vw; justify-content: space-around;">
-                  <mat-form-field class="half-width" style="width: 20vw;">
-                    <mat-label>Flavor</mat-label>
-                    <mat-select (selectionChange)="calculatePrice($event.value, i, 2)">
-                      <mat-option *ngFor="let tub of tubs" [value]="tub.Id">
-                        {{tub.flavorName}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                  <mat-form-field class="half-width">
-                    <input matInput type="number" formControlName="quantity" placeholder="Quantity"
-                      (input)="refreshPrice(i, 2)">
-                  </mat-form-field>
-                  <mat-form-field class="half-width">
-                    <!-- <input matInput type="text" formControlName="price" placeholder="Price" [readonly]="true"> -->
-                    <input matInput type="text" formControlName="price" placeholder="Price">
-                  </mat-form-field>
-                  <button mat-raised-button style="color: white; background-color: red; transform: scale(0.6);"
-                    type="button" (click)="onDelete(i, 2)">X</button>
+              <div class="col-xs-12">
+                <div formArrayName="icicleItems" *ngFor="let item of icicleItemsFormArray.controls; let i = index;">
+                  <div [formGroupName]="i">
+                    <div class="row" style="width: 60vw; justify-content: space-around;">
+                      <mat-form-field class="half-width" style="width: 20vw;">
+                        <mat-label>Flavor</mat-label>
+                        <!-- <mat-select (selectionChange)="calculatePrice($event.value, i, 1)"> -->
+                        <mat-select>
+                          <mat-option *ngFor="let icicle of icicles" [value]="icicle.id">
+                            {{icicle.flavorName}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-form-field class="half-width">
+                        <!-- <input matInput type="number" formControlName="quantity" placeholder="Quantity" (input)="refreshPrice(i, 1)"> -->
+                        <input matInput type="number" min="0" formControlName="quantity" placeholder="Quantity">
+                      </mat-form-field>
+                      <mat-form-field class="half-width">
+                        <!-- <input matInput type="text" formControlName="price" placeholder="Price" [readonly]="true"> -->
+                        <input matInput type="number" min="0" formControlName="price" placeholder="Price">
+                      </mat-form-field>
+                      <button mat-raised-button style="color: white; background-color: red; transform: scale(0.6);"
+                        type="button" (click)="onDelete(i, 1)">X</button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-        <hr style="border-color: black;">
+
+            <hr style="border-color: black;">
+            <!-- Tubs Data Row -->
+            <mat-grid-list cols="12" rowHeight="50px" gutterSize="6px">
+              <mat-grid-tile>
+                <div class="custom-row">
+                  <div class="col-sm-6">
+                    <h2 class="custom-size">Tubs</h2>
+                  </div>
+
+                </div>
+              </mat-grid-tile>
+
+              <mat-grid-tile colspan="10"></mat-grid-tile>
+
+              <mat-grid-tile>
+                <div class="col-sm-6">
+                  <button mat-raised-button class="button" (click)="addTub()">Add</button>
+                </div>
+              </mat-grid-tile>
+            </mat-grid-list>
+
+            <div class="custom-row">
+              <div class="col-xs-12">
+                <div formArrayName="tubItems" *ngFor="let item of tubItemsFormArray.controls; let i = index;">
+                  <div [formGroupName]="i">
+                    <div class="row" style="width: 60vw; justify-content: space-around;">
+                      <mat-form-field class="half-width" style="width: 20vw;">
+                        <mat-label>Flavor</mat-label>
+                        <!-- <mat-select (selectionChange)="calculatePrice($event.value, i, 2)"> -->
+                        <mat-select>
+                          <mat-option *ngFor="let tub of tubs" [value]="tub.id">
+                            {{tub.flavorName}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-form-field class="half-width">
+                        <!-- <input matInput type="number" formControlName="quantity" placeholder="Quantity"
+                      (input)="refreshPrice(i, 2)"
+                      > -->
+                        <input matInput type="number" formControlName="quantity" placeholder="Quantity">
+                      </mat-form-field>
+                      <mat-form-field class="half-width">
+                        <!-- <input matInput type="text" formControlName="price" placeholder="Price" [readonly]="true"> -->
+                        <input matInput type="text" formControlName="price" placeholder="Price">
+                      </mat-form-field>
+                      <button mat-raised-button style="color: white; background-color: red; transform: scale(0.6);"
+                        type="button" (click)="onDelete(i, 2)">X</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr style="border-color: black;">
 
 
-      </mat-card-content>
-      <mat-card-actions>
-      </mat-card-actions>
-    </mat-card>
-    <br>
-  </form>
+          </mat-card-content>
+          <mat-card-actions>
+          </mat-card-actions>
+        </mat-card>
+        <br>
+      </form>
+    </mat-tab>
+    <mat-tab label="Order List">
+      <app-order-list></app-order-list>
+    </mat-tab>
+  </mat-tab-group>
 </div>
+<page-loader></page-loader>
