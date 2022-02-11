@@ -71,23 +71,40 @@ body {
 
 .mat-tab-label .mat-tab-label-content {
   display: flex;
-    justify-content: center;
-    align-items: center;
-    white-space: nowrap;
-    color: black;
-    font-size: 18px;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  color: black;
+  font-size: 18px;
 }
 
 .mat-grid-tile-content {
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: space-between !important;
-    height: 100%;
-    padding: 0px 10px 0px 10px !important;
-    margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-between !important;
+  height: 100%;
+  padding: 0px 10px 0px 10px !important;
+  margin: 0;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.dni {
+  display: none !important;
+}
+
+.bgc {
+  background-color: #fec400 !important;
+}
+
+.cp {
+  cursor: pointer;
 }

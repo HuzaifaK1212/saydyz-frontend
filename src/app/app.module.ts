@@ -20,6 +20,7 @@ import { PageLoaderComponent } from './services/pageLoader/pageLoader.component'
 import { MatTabsModule } from '@angular/material/tabs';
 import { OrderListComponent } from './pages/order/order-list/order-list.component';
 import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { MatTableModule } from '@angular/material/table';
     MatGridListModule,
     ServiceModule,
     MatTabsModule,
-    MatTableModule
+    MatTableModule,
+    MatIconModule
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],

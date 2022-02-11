@@ -8,6 +8,7 @@ import { OrderService } from './services/order/order.service';
 import { PageLoaderComponent } from './services/pageLoader/pageLoader.component';
 import { UIService } from './services/ui/ui.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [HttpClientModule, MatProgressSpinnerModule],

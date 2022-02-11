@@ -7,11 +7,35 @@ import { Message, MessageTypes } from 'src/app/models/message.model';
 import { MappingService } from 'src/app/services/mapping/mapping.service';
 import { OrderService } from 'src/app/services/order/order.service';
 import { UIService } from 'src/app/services/ui/ui.service';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-order-list',
   templateUrl: './order-list.component.html',
   styleUrls: ['./order-list.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state(
+        'collapsed',
+        // style({ height: "0px", minHeight: "0", visibility: "hidden" })
+        style({ height: "0px", minHeight: "0" }),
+        // class("dni")
+        // style({ height: '0px', minHeight: '0' })
+      ),
+      state("expanded", style({ height: "*", visibility: "visible" })),
+      // state('expanded', style({ height: '*' })),
+      // transition(
+      //   'expanded <=> collapsed',
+      //   animate('500ms cubic-bezier(0.4, 0.0, 0.2, 1)')
+      // ),
+    ]),
+  ],
 })
 export class OrderListComponent implements OnInit {
   orderList: Order[] = [];
@@ -23,6 +47,7 @@ export class OrderListComponent implements OnInit {
     'customerType',
     'phoneNo',
     'address',
+    'actions',
   ];
   dataSource = new MatTableDataSource<Order>(this.orderList);
 
@@ -35,6 +60,9 @@ export class OrderListComponent implements OnInit {
   length: number = 0;
   pagination = 0;
   paginations = [];
+
+  expandedElement: any;
+  isExpansionDetailRow = (i: number, row: Object) => true;
 
   constructor(
     private _logService: LogService,
@@ -89,6 +117,16 @@ export class OrderListComponent implements OnInit {
       this.isSpinner = false;
       // this._logService.logMessage("error: ");
       // this._logService.logError(error);
+    }
+  }
+
+  expandedRow(row: Order, index: any) {
+    // if (this.expandedElement == row.documentId) {
+    if (this.expandedElement == index) {
+      this.expandedElement = null;
+    } else {
+      // this.expandedElement = row.documentId;
+      this.expandedElement = index;
     }
   }
 }
