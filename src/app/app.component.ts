@@ -6,9 +6,12 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 import { Message, MessageTypes } from './models/message.model';
 import {
+  Area,
+  Channel,
   Customer,
   Icicle,
   Order,
@@ -16,8 +19,11 @@ import {
   Tub,
   Type,
 } from './models/models';
+import { PhoneSearchComponent } from './pages/dialog/phone-search/phone-search.component';
+import { OrderListComponent } from './pages/order/order-list/order-list.component';
 import { LogService } from './services/base/log.service';
 import { EnvService } from './services/env/env.service';
+import { MappingService } from './services/mapping/mapping.service';
 import { OrderService } from './services/order/order.service';
 import { UIService } from './services/ui/ui.service';
 
@@ -30,15 +36,18 @@ export class AppComponent implements OnInit {
   mainForm!: FormGroup;
   items!: FormArray;
   order!: Order;
-  promoItems!: Order[];
+  areas!: Area[];
+  channels!: Channel[];
   numPattern = '^[0-9]+$';
 
   constructor(
     private formBuilder: FormBuilder,
     private _uiService: UIService,
-    private logService: LogService,
+    private _logService: LogService,
     private orderService: OrderService,
-    public environment: EnvService
+    public environment: EnvService,
+    public _mappingService : MappingService,
+    public dialog: MatDialog,
   ) {}
 
   types: Type[] = [
@@ -91,6 +100,7 @@ export class AppComponent implements OnInit {
       gender: [''],
       channel: [''],
       phoneNo: [''],
+      area: [''],
       address: [''],
       customerTypeId: [''],
       icicleItems: new FormArray([]),
@@ -102,6 +112,8 @@ export class AppComponent implements OnInit {
     });
 
     this.generateOrderNo();
+    this.loadAreaListAll();
+    this.loadChannelListAll();
   }
 
   get icicleItemsFormArray() {
@@ -244,24 +256,25 @@ export class AppComponent implements OnInit {
   // });
 
   async onSubmit() {
-    this.logService.logMessage('onSubmit');
+    this._logService.logMessage('onSubmit');
     const msg = new Message();
-    this.logService.logMessage('showSpinner');
+    this._logService.logMessage('showSpinner');
     this._uiService.showSpinner();
-    this.logService.logMessage(this.mainForm);
+    this._logService.logMessage(this.mainForm);
     this.order = new Order();
     if (this.mainForm) {
       let cust = new Customer();
       cust.name = this.mainForm.get('customerName')?.value ?? null;
       cust.gender = this.mainForm.get('gender')?.value ?? null;
       cust.address = this.mainForm.get('address')?.value ?? null;
+      cust.areaId = this.mainForm.get('area')?.value ?? null;
       cust.phoneNo = this.mainForm.get('phoneNo')?.value ?? null;
       cust.customerTypeId = this.mainForm.get('customerTypeId')?.value ?? null;
 
       this.order.orderCode = this.mainForm.get('orderId')?.value ?? null;
       this.order.createdOn = this.mainForm.get('orderDate')?.value ?? null;
       this.order.customer = cust;
-      this.order.channel = this.mainForm.get('channel')?.value ?? null;
+      this.order.channelId = this.mainForm.get('channel')?.value ?? null;
       this.order.totalPrice = this.mainForm.get('totalPrice')?.value ?? null;
       this.order.discount = this.mainForm.get('discount')?.value ?? null;
       this.order.deliveryCharge =
@@ -280,12 +293,14 @@ export class AppComponent implements OnInit {
       msg.autoCloseAfter = 400;
       this._uiService.showToast(msg, 'info');
       this.mainForm.reset();
+      this.items ? this.items.length > 0 ? this.items.clear() : null : null;
+      this.generateOrderNo();
     } catch (error) {
       setTimeout(() => {
         this._uiService.hideSpinner();
       }, 4000);
-      this.logService.logMessage('error: ');
-      this.logService.logError(error);
+      this._logService.logMessage('error: ');
+      this._logService.logError(error);
     }
   }
 
@@ -295,10 +310,10 @@ export class AppComponent implements OnInit {
     if (icicles.length > 0) {
       for (let control of icicles.controls) {
         let oi = new OrderItems();
-        oi.price = control.value.price ?? 0;
+        oi.price = control.value.price ?? "0";
         oi.quantity = control.value.quantity ?? 0;
         oi.flavorId = 1;
-        oi.isPromo = control.value.price == 0 ? true : false;
+        oi.isPromo = control.value.price == "0" ? true : false;
         allOrderItems.push(oi);
       }
     }
@@ -321,20 +336,79 @@ export class AppComponent implements OnInit {
   async generateOrderNo() {
     var res: any = await this.orderService.getOrderListAll();
 
-    var index = res.data.length;
-    var currentOrderNo = res.data[index - 1].orderCode;
-    var tempNum = currentOrderNo.split('-');
+    if (res.data.length > 0) {
+      var index = res.data.length;
+      var currentOrderNo = res.data[index - 1].orderCode ?? 'OD-00000';
+      var tempNum = currentOrderNo.split('-');
 
-    var num = +tempNum[1];
-    num++;
+      var num = +tempNum[1];
+      num++;
 
-    currentOrderNo = num.toString().padStart(5, '0');
+      currentOrderNo = num.toString().padStart(5, '0');
 
-    this.mainForm.patchValue({
-      orderId: tempNum[0] + '-' + currentOrderNo,
-    });
+      this.mainForm.patchValue({
+        orderId: tempNum[0] + '-' + currentOrderNo ?? 'OD-00000',
+      });
+    } else {
+      this.mainForm.patchValue({
+        orderId: 'OD-00000',
+      });
+    }
 
     return 1;
   }
+
+  async loadAreaListAll() {
+    try {
+      let res: any = await this.orderService.getAreaListAll();
+      let tempArray = res.data || [];
+      let alist : Area[] = [];
+      if (res.data && res.data.length > 0) {
+        for (let i = 0; i < res.data.length; i++) {
+          let area = this._mappingService.mapArea(tempArray[i]);
+          alist.push(area);
+        }
+      this.areas = alist;
+      }
+    } catch (error) {
+      this._logService.logMessage('error: ');
+      this._logService.logError(error);
+    }
+  }
+
+  async loadChannelListAll() {
+    try {
+      let res: any = await this.orderService.getChannelListAll();
+      let tempArray = res.data || [];
+      let clist : Channel[] = [];
+      if (res.data && res.data.length > 0) {
+        for (let i = 0; i < res.data.length; i++) {
+          let channel = this._mappingService.mapChannel(tempArray[i]);
+          clist.push(channel);
+        }
+      this.channels = clist;
+      }
+    } catch (error) {
+      this._logService.logMessage('error: ');
+      this._logService.logError(error);
+    }
+  }
+
+  openDialog() : void {
+    const msg = new Message();
+    if(this.mainForm.controls['phoneNo']?.value.length == 10) {
+      const dialogRef = this.dialog.open(PhoneSearchComponent, {
+        width: '900px',
+        height: '600px'
+      });
+      this._logService.logMessage(this.mainForm.controls['phoneNo']?.value);
+    } else {
+      msg.msg = 'Please enter complete phone number';
+      msg.msgType = MessageTypes.Information;
+      msg.autoCloseAfter = 400;
+      this._uiService.showToast(msg, 'error');
+    }
+  }
+
   title = 'saydyz-frontend';
 }

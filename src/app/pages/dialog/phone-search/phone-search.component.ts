@@ -1,24 +1,23 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Order } from 'src/app/models/models';
+import { state, style, trigger } from '@angular/animations';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { LogService } from 'src/app/services/base/log.service';
 import { Message, MessageTypes } from 'src/app/models/message.model';
+import { Order } from 'src/app/models/models';
+import { LogService } from 'src/app/services/base/log.service';
 import { MappingService } from 'src/app/services/mapping/mapping.service';
 import { OrderService } from 'src/app/services/order/order.service';
 import { UIService } from 'src/app/services/ui/ui.service';
-import {
-  trigger,
-  state,
-  style,
-  transition,
-  animate,
-} from '@angular/animations';
 
 @Component({
-  selector: 'app-order-list',
-  templateUrl: './order-list.component.html',
-  styleUrls: ['./order-list.component.scss'],
+  selector: 'app-phone-search',
+  templateUrl: './phone-search.component.html',
+  styleUrls: ['./phone-search.component.scss'],
   animations: [
     trigger('detailExpand', [
       state(
@@ -35,9 +34,10 @@ import {
       //   animate('500ms cubic-bezier(0.4, 0.0, 0.2, 1)')
       // ),
     ]),
-  ],
+  ]
 })
-export class OrderListComponent implements OnInit {
+export class PhoneSearchComponent implements OnInit {
+
   orderList: Order[] = [];
   @ViewChild(MatPaginator, {}) paginator!: MatPaginator;
   displayedColumns = [
@@ -65,17 +65,24 @@ export class OrderListComponent implements OnInit {
   isExpansionDetailRow = (i: number, row: Object) => true;
 
   constructor(
-    private _logService: LogService,
-    private _mappingService: MappingService,
-    private _orderService: OrderService,
-    private _uiService: UIService
+    public dialog: MatDialog,
+    public dialogRef: MatDialogRef<PhoneSearchComponent>,
+    private _logService : LogService,
+    private _orderService : OrderService,
+    private _mappingService : MappingService,
+    private _uiService : UIService
   ) {}
 
-  ngOnInit(): void {
-    this.loadOrderAllList();
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
-  async loadOrderAllList() {
+  ngOnInit(): void {
+    this.loadCustomOrderList();
+  }
+
+  async loadCustomOrderList() {
     const msg = new Message();
 
     this.paginations = [];
@@ -108,7 +115,7 @@ export class OrderListComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
 
       if (this.orderList.length == 0) {
-        msg.msg = 'No Order Found';
+        msg.msg = 'No Order Found for entered phone no';
         msg.msgType = MessageTypes.Information;
         msg.autoCloseAfter = 400;
         this._logService.logMessage(msg);
@@ -126,8 +133,8 @@ export class OrderListComponent implements OnInit {
     if (this.expandedElement == row) {
       this.expandedElement = null;
     } else {
+      // this.expandedElement = row.documentId;
       this.expandedElement = row;
     }
   }
-
 }

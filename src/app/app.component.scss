@@ -36,26 +36,35 @@
   font-weight: bold;
 }
 
-.full-width {
-  width: 30vw;
+.xl {
+  width: 35vw;
   font-size: 16px;
   font-weight: bold;
-  margin-left: 10px;
+  margin-right: 5vw;
+  margin-bottom: -0.5em;
+}
+
+.full-width {
+  width: 20vw;
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 5vw;
+  margin-bottom: -0.5em;
 }
 
 .half-width {
-  width: 15vw;
+  width: 10vw;
   font-size: 16px;
   font-weight: bold;
-  margin-left: 10px;
+  margin-left: 5px;
+  margin-bottom: -0.5em;
 }
 
 .quarter-width {
   align-content: flex-start;
   width: 5vw;
   font-size: 15px;
-  font-weight: bold;
-  // margin-left: 1vw;
+  margin-bottom: -0.5em;
 }
 
 .image {
@@ -69,6 +78,7 @@
   color: black;
   background-color: #ffeb32;
   transform: scale(1.2);
+  margin-top: -1.5em;
 }
 
 ::ng-deep.mat-form-field-ripple {
@@ -81,10 +91,11 @@
   color: black !important;
   background-color: transparent !important;
   font-weight: normal !important;
+  margin-bottom: -1.5em;
  }
 
  .mat-grid-tile {
-  // border: solid 2px #000;
+  border: solid 2px #000;
 }
 
 input:-webkit-autofill,
@@ -92,4 +103,8 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active  {
     -webkit-box-shadow: 0 0 0 30px #f3c30e inset !important;
+}
+
+::ng-deep .mat-dialog-container {
+  background-color: #faeb30 !important;
 }

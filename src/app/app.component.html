@@ -15,14 +15,12 @@
           <mat-card-content>
 
             <!-- Top Head items -->
-            <mat-grid-list cols="20" rowHeight="65px" gutterSize="6px">
-              <mat-grid-tile colspan="3">
+            <mat-grid-list cols="20" rowHeight="50px" gutterSize="6px">
+              <mat-grid-tile colspan="2" rowspan="2">
                 <!-- Order Id -->
-                <div class="col-xs-6" class="">
+                <div class="col-xs-6">
                   <!-- <h3 class="h3">Order ID:</h3> -->
                   <label for="orderId" class="label">Order ID: </label>
-                </div>
-                <div class="col-xs-6">
                   <mat-form-field class="quarter-width">
                     <input type="text" [readonly]="true" formControlName="orderId" matInput>
                   </mat-form-field>
@@ -41,48 +39,61 @@
                 </div>
               </mat-grid-tile>
 
-              <mat-grid-tile colspan="3"></mat-grid-tile>
+              <mat-grid-tile colspan="7"></mat-grid-tile>
 
-              <mat-grid-tile colspan="2">
+              <mat-grid-tile colspan="2" rowspan="2">
 
                 <!-- Total Price -->
-                <label for="totalPrice" class="label">Total: </label>
-                <mat-form-field class="quarter-width">
-                  <input type="text" formControlName="totalPrice" [readonly]="true" matInput>
-                  <!-- <input type="text" formControlName="totalPrice" matInput> -->
-                </mat-form-field>
+                <div class="col-xs-3">
+                  <label for="totalPrice" class="label">Total: </label>
+                  <mat-form-field class="quarter-width">
+                    <span matPrefix>Rs. &nbsp;</span>
+                    <input type="text" formControlName="totalPrice" [readonly]="true" matInput>
+                    <!-- <input type="text" formControlName="totalPrice" matInput> -->
+                  </mat-form-field>
+                </div>
               </mat-grid-tile>
 
-              <mat-grid-tile colspan="3">
-                <!-- Discount -->
-                <label for="discount" class="label">Discount</label>
-                <mat-form-field class="quarter-width">
-                  <input type="number" min="0" formControlName="discount" [pattern]="numPattern" matInput>
-                </mat-form-field>
+              <mat-grid-tile colspan="2" rowspan="2">
+                <div class="col-xs-3">
+                  <!-- Discount -->
+                  <label for="discount" class="label">Discount</label>
+                  <mat-form-field class="quarter-width">
+                    <input type="number" min="0" formControlName="discount" [pattern]="numPattern" matInput>
+                    <span matSuffix style="font-weight: bold;">% &nbsp;</span>
+                  </mat-form-field>
+                </div>
               </mat-grid-tile>
 
-              <mat-grid-tile colspan="3">
-                <!-- Delivery Charges -->
-                <label for="deliveryCharge" class="label">Delivery: </label>
-                <mat-form-field class="quarter-width">
-                  <!-- <input type="text" formControlName="totalPrice" [readonly]="true" matInput> -->
-                  <input type="number" min="0" formControlName="deliveryCharge" matInput>
-                </mat-form-field>
+              <mat-grid-tile colspan="2" rowspan="2">
+                <div class="col-xs-3">
+                  <!-- Delivery Charges -->
+                  <label for="deliveryCharge" class="label">Delivery: </label>
+                  <mat-form-field class="quarter-width">
+                    <span matPrefix>Rs. &nbsp;</span>
+                    <!-- <input type="text" formControlName="totalPrice" [readonly]="true" matInput> -->
+                    <input type="number" min="0" formControlName="deliveryCharge" matInput>
+                  </mat-form-field>
+                </div>
               </mat-grid-tile>
 
-              <mat-grid-tile colspan="3">
+              <mat-grid-tile colspan="2" rowspan="2">
 
-                <!-- Sale Price -->
-                <label for="salePrice" class="label">Sale Price</label>
-                <mat-form-field class="quarter-width">
-                  <input type="text" formControlName="salePrice" [readonly]="true" matInput>
-                  <!-- <input type="text" formControlName="salePrice" matInput> -->
-                </mat-form-field>
+                <div class="col-xs-3">
+                  <!-- Sale Price -->
+                  <label for="salePrice" class="label">Sale Price</label>
+                  <mat-form-field class="quarter-width">
+                    <span matPrefix>Rs. &nbsp;</span>
+                    <input type="text" formControlName="salePrice" [readonly]="true" matInput>
+                    <!-- <input type="text" formControlName="salePrice" matInput> -->
+                  </mat-form-field>
+                </div>
+
               </mat-grid-tile>
             </mat-grid-list>
 
             <!-- Buttons  -->
-            <mat-grid-list cols="12" rowHeight="50px" gutterSize="6px">
+            <mat-grid-list cols="12" rowHeight="60px" gutterSize="6px">
               <mat-grid-tile colspan="10"></mat-grid-tile>
 
               <mat-grid-tile colspan="1">
@@ -104,15 +115,14 @@
 
             <br><br>
             <!-- Customer Details Grid -->
-            <mat-grid-list cols="2" rowHeight="50px" gutterSize="6px">
+            <mat-grid-list cols="12" rowHeight="50px" gutterSize="6px">
 
-              <mat-grid-tile>
+              <mat-grid-tile colspan="3" rowspan="2">
                 <!-- Customer Name Row -->
                 <!-- <div class="custom-row"> -->
-                <div class="col-xs-3">
-                  <label for="customerName" class="label">Customer Name</label>
-                </div>
-                <div class="col-xs-3">
+                <div class="col-xs-6">
+                  <!-- <label for="customerName" class="label">Customer Name:</label> -->
+                  <mat-label for="customerName" class="label">Customer Name:</mat-label>
                   <mat-form-field class="full-width">
                     <input type="text" formControlName="customerName" matInput>
                   </mat-form-field>
@@ -120,56 +130,56 @@
                 <!-- </div> -->
               </mat-grid-tile>
 
-              <mat-grid-tile>
+
+              <mat-grid-tile colspan="2" rowspan="2">
 
                 <!-- Phone No Row -->
-                <div class="custom-row">
-                  <div class="col-sm-6">
+                <div class="col-xs-6">
+                  <div class="col-xs-3">
                     <label for="phoneNo" class="label">Phone No</label>
-                    <mat-form-field class="full-width">
-                      <input type="text" formControlName="phoneNo" matInput>
+                  </div>
+                  <div class="col-xs-3">
+                    <mat-form-field class="half-width">
+                      <span matPrefix>+92 &nbsp;</span>
+                      <input type="text" formControlName="phoneNo" matInput mask='000 0000000' />
                     </mat-form-field>
+                    <button mat-icon-button (click)="openDialog()">
+                      <mat-icon>search</mat-icon>
+                    </button>
                   </div>
                 </div>
               </mat-grid-tile>
 
-              <mat-grid-tile>
-                <!-- Customer Gender Row -->
+              <mat-grid-tile colspan="7" rowspan="2"></mat-grid-tile>
 
-                <div class="col-xs-3">
-                  <label for="gender" class="label">Gender</label>
-                  <!-- <div class="custom-row"> -->
-                </div>
-                <div class="col-xs-3">
-                  <mat-form-field class="full-width">
-                    <mat-select formControlName="gender">
-                      <mat-option *ngFor="let gender of genders" [value]="gender">
-                        {{gender}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
+
+              <mat-grid-tile colspan="3" rowspan="2">
+                <!-- Customer Gender Row -->
+                <div class="col-xs-6">
+                  <div class="col-xs-3">
+                    <label for="gender" class="label">Gender</label>
+                    <!-- <div class="custom-row"> -->
+                  </div>
+                  <div class="col-xs-3">
+                    <mat-form-field class="full-width">
+                      <mat-select formControlName="gender">
+                        <mat-option *ngFor="let gender of genders" [value]="gender">
+                          {{gender}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
                 </div>
                 <!-- </div> -->
               </mat-grid-tile>
 
-              <mat-grid-tile>
-                <!-- Address Row -->
-                <div class="custom-row">
-                  <div class="col-sm-6">
-                    <label for="address" class="label">Address</label>
-                    <mat-form-field class="full-width">
-                      <input type="text" formControlName="address" matInput>
-                    </mat-form-field>
-                  </div>
-                </div>
-              </mat-grid-tile>
-
-              <mat-grid-tile>
+              <mat-grid-tile colspan="3" rowspan="2">
                 <!-- Customer Type Row -->
+                <div class="col-xs-6">
                   <div class="col-xs-3">
                     <label for="customerType" class="label">Customer Type</label>
-                    </div>
-                    <div class="col-xs-3">
+                  </div>
+                  <div class="col-xs-3">
                     <mat-form-field class="full-width">
                       <mat-select formControlName="customerTypeId">
                         <mat-option *ngFor="let type of types" [value]="type.value">
@@ -178,20 +188,65 @@
                       </mat-select>
                     </mat-form-field>
                   </div>
+                </div>
               </mat-grid-tile>
 
-              <mat-grid-tile>
+              <mat-grid-tile colspan="6" rowspan="2"></mat-grid-tile>
+
+              <mat-grid-tile colspan="3" rowspan="2">
                 <!-- Channel Row -->
-                <div class="custom-row">
-                  <div class="col-sm-6">
+                <div class="col-xs-6">
+                  <div class="col-xs-3">
                     <label for="channel" class="label">Channel</label>
+                  </div>
+                  <div class="col-xs-3">
                     <mat-form-field class="full-width">
-                      <input type="text" formControlName="channel" matInput>
+                      <mat-select formControlName="channel">
+                        <mat-option *ngFor="let channel of channels" [value]="channel.id">
+                          {{channel.name}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </mat-grid-tile>
+
+              <mat-grid-tile colspan="3" rowspan="2">
+                <!-- Address Row -->
+                <div class="col-xs-6">
+                  <div class="col-xs-3">
+                    <label for="area" class="label">Area</label>
+                  </div>
+                  <div class="col-xs-3">
+                    <mat-form-field class="full-width">
+                      <mat-select formControlName="area">
+                        <mat-option *ngFor="let area of areas" [value]="area.id">
+                          {{area.name}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </mat-grid-tile>
+
+              <mat-grid-tile colspan="6" rowspan="2">
+                <!-- Address Row -->
+                <div class="col-xs-6">
+                  <div class="col-xs-3">
+                    <label for="address" class="label">Address</label>
+                  </div>
+                  <div class="col-xs-3">
+                    <mat-form-field class="xl">
+                      <input type="text" formControlName="address" matInput>
                     </mat-form-field>
                   </div>
                 </div>
               </mat-grid-tile>
             </mat-grid-list>
+
+
+
+            <!-- <mat-grid-tile colspan="6" rowspan="2"></mat-grid-tile> -->
 
             <br>
             <br>
@@ -359,9 +414,10 @@
     </mat-tab>
     <mat-tab label="Order List">
       <ng-template matTabContent>
-      <app-order-list></app-order-list>
-    </ng-template>
+        <app-order-list></app-order-list>
+      </ng-template>
     </mat-tab>
   </mat-tab-group>
 </div>
+<toast></toast>
 <page-loader></page-loader>

@@ -21,12 +21,17 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { OrderListComponent } from './pages/order/order-list/order-list.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { SharedModule } from './shared/shared.module';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { PhoneSearchComponent } from './pages/dialog/phone-search/phone-search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageLoaderComponent,
-    OrderListComponent
+    OrderListComponent,
+    PhoneSearchComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,10 +50,25 @@ import { MatIconModule } from '@angular/material/icon';
     ServiceModule,
     MatTabsModule,
     MatTableModule,
-    MatIconModule
-    ],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
-  bootstrap: [AppComponent]
+    MatIconModule,
+    NgxMaskModule.forRoot(),
+    SharedModule,
+    MatDialogModule
+  ],
+  exports: [
+    BrowserAnimationsModule
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [
+    {
+      provide: MatDialogRef,
+      useValue: {}
+    },
+    {
+      provide: MAT_DIALOG_DATA,
+      useValue: {}
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

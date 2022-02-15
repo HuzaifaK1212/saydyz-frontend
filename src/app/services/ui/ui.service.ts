@@ -78,7 +78,7 @@ export class UIService {
     showToast(msg: Message, type: string) {
 
         this._logService.logMessage("showToast")
-        this._logService.logMessage("msg")
+        this._logService.logMessage(msg)
         // this._logService.logMessage(msg)
         // this._logService.logMessage("type")
         // this._logService.logMessage(type)

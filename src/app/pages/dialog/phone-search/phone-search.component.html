@@ -1,0 +1,143 @@
+<div>
+  <table mat-table [dataSource]="dataSource" class="table" multiTemplateDataRows>
+
+    <!--- Note: These columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- S.No Column -->
+    <ng-container matColumnDef="sNo">
+      <th mat-header-cell *matHeaderCellDef>
+        S.No
+      </th>
+      <!-- <td mat-cell *matCellDef="let row; let i = index;"> -->
+      <td mat-cell *matCellDef="let element; let i = index;">
+        {{ i + 1 }}
+        <!-- {{ element?.id}} -->
+      </td>
+    </ng-container>
+
+    <!-- Order No (OrderCode) -->
+    <ng-container matColumnDef="orderNo">
+      <th mat-header-cell *matHeaderCellDef> Order No. </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element?.orderCode || "NA" }}
+      </td>
+    </ng-container>
+
+    <!-- Customer Name -->
+    <ng-container matColumnDef="customerName">
+      <th mat-header-cell *matHeaderCellDef> Customer Name </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element?.customer?.name || "NA" }}
+      </td>
+    </ng-container>
+
+    <!-- Customer Gender -->
+    <ng-container matColumnDef="customerGender">
+      <th mat-header-cell *matHeaderCellDef> Customer Gender </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element?.customer?.gender || "NA" }}
+      </td>
+    </ng-container>
+
+    <!-- Customer Type -->
+    <ng-container matColumnDef="customerType">
+      <th mat-header-cell *matHeaderCellDef> Customer Type </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element?.customer?.customerTypeId == 1 ? "Individual" : "Retailer" || "NA" }}
+      </td>
+    </ng-container>
+
+    <!-- Phone No -->
+    <ng-container matColumnDef="phoneNo">
+      <th mat-header-cell *matHeaderCellDef> Phone No </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element?.customer?.phoneNo || "NA" }}
+      </td>
+    </ng-container>
+
+    <!-- Address -->
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef> Address </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element?.customer?.address || "NA" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let element; let i = dataIndex">
+        <div class="button-spacing" role="group">
+          <span matTooltipPosition="above" matTooltip="View">
+            <button type="button" mat-icon-button (click)="expandedRow(element)">
+              <mat-icon>visibility</mat-icon>
+            </button>
+          </span>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+        <div [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'" style="background-color: #fec400;">
+
+          <mat-grid-list cols="12" rowHeight="30px" gutterSize="5px">
+            <mat-grid-tile>
+              <h3 style="margin-top: 10px">Items</h3>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="12"></mat-grid-tile>
+            <div *ngFor="let item of element.orderItems; let i = index">
+
+              <mat-grid-tile>
+                S.No:
+              </mat-grid-tile>
+              <mat-grid-tile>
+                {{i + 1}}
+              </mat-grid-tile>
+              <mat-grid-tile colspan="10"></mat-grid-tile>
+              <mat-grid-tile>
+                Flavor:
+              </mat-grid-tile>
+              <mat-grid-tile colspan="3">
+                {{item?.flavor?.name}}
+              </mat-grid-tile>
+              <mat-grid-tile colspan="8"></mat-grid-tile>
+
+              <mat-grid-tile>
+                Quantity:
+              </mat-grid-tile>
+              <mat-grid-tile>
+                {{item?.quantity}}
+              </mat-grid-tile>
+              <mat-grid-tile colspan="10"></mat-grid-tile>
+
+              <mat-grid-tile>
+                Price:
+              </mat-grid-tile>
+              <mat-grid-tile>
+                {{item?.price}}
+              </mat-grid-tile>
+              <mat-grid-tile colspan="10"></mat-grid-tile>
+
+              <mat-grid-tile colspan="12">
+                <hr style="border-color: black;">
+              </mat-grid-tile>
+
+            </div>
+
+          </mat-grid-list>
+
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="element-row"></tr>
+
+    <!-- <tr mat-row *matRowDef="let row; columns: ['expandedDetail']; let i=dataIndex; when: isExpansionDetailRow"
+    [@detailExpand]="i == expandedElement ? 'expanded' : 'collapsed'"  class="bgc"></tr> -->
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']; let i=dataIndex; when: isExpansionDetailRow"
+      [@detailExpand]="i == expandedElement ? 'expanded' : 'collapsed'" [ngClass]="row == expandedElement ? '' : 'dni'"
+      class="bgc"></tr>
+  </table>
+</div>

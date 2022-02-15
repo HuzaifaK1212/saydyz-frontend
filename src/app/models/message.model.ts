@@ -11,7 +11,7 @@ export class Message {
   iconType = 'info';
   icon = '';
   msg = '';
-  title = 'Saydyz Order';
+  title = 'Saydyz Form';
   autoCloseAfter = 500;
   okBtnTitle = 'Ok';
   cancelBtnTitle = 'Cancel';

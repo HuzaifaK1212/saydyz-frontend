@@ -28,7 +28,7 @@ export class Order {
   orderCode? : number;
   createdOn? : string;
   customer? : Customer;
-  channel? : string;
+  channelId? : number;
   totalPrice? : string;
   discount? : string;
   deliveryCharge? : string;
@@ -37,10 +37,22 @@ export class Order {
 }
 
 export class Customer {
-  name? : string
-  gender? : string
-  address? : string
-  area? : string
-  phoneNo? : string
-  customerTypeId? : number
+  name? : string;
+  gender? : string;
+  address? : string;
+  areaId? : number;
+  phoneNo? : string;
+  customerTypeId? : number;
+}
+
+export class Area {
+  id? : number;
+  code? : string;
+  name? : string;
+}
+
+export class Channel {
+  id? : number;
+  code? : string;
+  name? : string;
 }

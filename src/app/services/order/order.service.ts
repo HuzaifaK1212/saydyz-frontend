@@ -43,7 +43,7 @@ export class OrderService {
       Name: orderData.customer?.name,
       Gender: orderData.customer?.gender,
       Address: orderData.customer?.address,
-      Area: "",
+      AreaId: orderData.customer?.areaId,
       PhoneNo: orderData.customer?.phoneNo,
       CustomerTypeId : orderData.customer?.customerTypeId
     };
@@ -52,7 +52,7 @@ export class OrderService {
       OrderCode: orderData.orderCode,
       CreatedOn: orderData.createdOn,
       Customer: cust,
-      Channel: orderData.channel,
+      ChannelId: orderData.channelId,
       TotalPrice: orderData.totalPrice?.toString(),
       Discount: orderData.discount?.toString(),
       DeliveryCharge: orderData.deliveryCharge,
@@ -65,6 +65,21 @@ export class OrderService {
 
   async getOrderListAll() {
     let url = this._completeUrl("order/all");
+    return await this._http.get(url).toPromise();
+  }
+
+  async getAreaListAll() {
+    let url = this._completeUrl("order/area/all");
+    return await this._http.get(url).toPromise();
+  }
+
+  async getChannelListAll() {
+    let url = this._completeUrl("order/channel/all");
+    return await this._http.get(url).toPromise();
+  }
+
+  async getOrdersViaCustomerPhoneNo(phoneno : string) {
+    let url = this._completeUrl("order/customer/" + phoneno);
     return await this._http.get(url).toPromise();
   }
 }

@@ -78,6 +78,40 @@ body {
   font-size: 18px;
 }
 
+table {
+  width: 100%;
+}
+.table-responsive {
+  display: block;
+  width: 100%;
+  .mat-table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    display: table;
+    border-collapse: collapse;
+    margin: 0px;
+    overflow: auto;
+    background-color: #f3c30e;
+  }
+  .mat-row,
+  .mat-header-row {
+    display: table-row;
+  }
+  .mat-cell,
+  .mat-header-cell {
+    word-wrap: initial;
+    display: table-cell;
+    padding: 0px 5px;
+    line-break: unset;
+    width: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: middle;
+    font-size: 18px;
+  }
+}
+
 .mat-grid-tile-content {
   top: 0;
   left: 0;
@@ -88,7 +122,7 @@ body {
   align-items: center;
   justify-content: space-between !important;
   height: 100%;
-  padding: 0px 10px 0px 10px !important;
+  padding: 5px 10px 5px 10px !important;
   margin: 0;
 }
 
@@ -108,3 +142,6 @@ body {
 .cp {
   cursor: pointer;
 }
+
+
+
