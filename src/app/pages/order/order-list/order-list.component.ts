@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Order } from 'src/app/models/models';
+import { Order, OrderItems } from 'src/app/models/models';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { LogService } from 'src/app/services/base/log.service';
@@ -45,7 +45,9 @@ export class OrderListComponent implements OnInit {
     'customerName',
     'customerGender',
     'customerType',
+    'channel',
     'phoneNo',
+    'area',
     'address',
     'actions',
   ];
@@ -63,6 +65,24 @@ export class OrderListComponent implements OnInit {
 
   expandedElement: any;
   isExpansionDetailRow = (i: number, row: Object) => true;
+
+  @ViewChild(MatPaginator, {}) paginatorI!: MatPaginator;
+  displayedColumnsItems = [
+    "sNo",
+    "flavor",
+    "quantity",
+    "price",
+    "itemtype"
+  ];
+
+  pageSizeOptionsI = [10, 25, 50, 100];
+  paCountI = 0;
+  pageIndexI = 0;
+  pageSizeI = 10; // by default
+  pageEventI!: PageEvent;
+  lengthI: number = 0;
+  paginationI = 0;
+  paginationsI = [];
 
   constructor(
     private _logService: LogService,
@@ -85,7 +105,8 @@ export class OrderListComponent implements OnInit {
     this.dataSource = new MatTableDataSource<Order>(this.orderList);
 
     try {
-      let res: any = await this._orderService.getOrderListAll();
+      let res: any = await this._orderService.getOrderListAll()
+      // this._orderService.getOrderListAll();
 
       this.isSpinner = false;
       // this._logService.logMessage("success res: ");
@@ -101,11 +122,17 @@ export class OrderListComponent implements OnInit {
       }
       this.orderList = oList;
 
-      // this._logService.logMessage("orderList: ");
-      // this._logService.logResponse(this.orderList);
+      this._logService.logMessage("orderList: ");
+      this._logService.logResponse(this.orderList);
 
       this.dataSource = new MatTableDataSource<Order>(this.orderList);
       this.dataSource.paginator = this.paginator;
+
+      msg.msg = 'No Order Found';
+        msg.msgType = MessageTypes.Information;
+        msg.autoCloseAfter = 400;
+        this._logService.logMessage(msg);
+        this._uiService.showToast(msg, 'info');
 
       if (this.orderList.length == 0) {
         msg.msg = 'No Order Found';
@@ -114,6 +141,7 @@ export class OrderListComponent implements OnInit {
         this._logService.logMessage(msg);
         this._uiService.showToast(msg, 'info');
       }
+
     } catch (error) {
       this.isSpinner = false;
       this._logService.logMessage("error: ");
@@ -129,5 +157,11 @@ export class OrderListComponent implements OnInit {
       this.expandedElement = row;
     }
   }
+
+  // ngOnDestroy(): void {
+  //   //Called once, before the instance is destroyed.
+  //   //Add 'implements OnDestroy' to the class.
+  //   this.loadOrderAllList();
+  // }
 
 }

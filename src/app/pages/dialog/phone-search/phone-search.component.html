@@ -120,7 +120,7 @@
               <mat-grid-tile colspan="10"></mat-grid-tile>
 
               <mat-grid-tile colspan="12">
-                <hr style="border-color: black;">
+                <hr style="border-color: black; width: 100%;">
               </mat-grid-tile>
 
             </div>
@@ -140,4 +140,18 @@
       [@detailExpand]="i == expandedElement ? 'expanded' : 'collapsed'" [ngClass]="row == expandedElement ? '' : 'dni'"
       class="bgc"></tr>
   </table>
+  <div class="row" style="justify-content: center; background-color: #f3c30e;" *ngIf="(dataSource.data.length == 0) && !isSpinner">
+    <div class="snipet download-btn">
+      <!-- <button (click)="refreshList()" mat-raised-button> -->
+      <button mat-raised-button (click)="refreshList()" style="background-color: #faeb30;">
+        <i class="material-icons">refresh</i> No Data Found
+      </button>
+    </div>
+  </div>
+  <spinner [visible]='isSpinner'></spinner>
+
+  <mat-paginator class="bgc" #paginator [length]="length" [pageIndex]="pageIndex" [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions">
+    <!-- (page)="pageEvent = pageChangeEvent($event)" -->
+  </mat-paginator>
 </div>

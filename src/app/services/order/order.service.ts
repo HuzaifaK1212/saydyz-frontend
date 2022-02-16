@@ -82,4 +82,20 @@ export class OrderService {
     let url = this._completeUrl("order/customer/" + phoneno);
     return await this._http.get(url).toPromise();
   }
+
+  async getFlavorListAll() {
+    let url = this._completeUrl("order/flavor/all");
+    return await this._http.get(url).toPromise();
+  }
+
+  async getItemTypeAll() {
+    let url = this._completeUrl("order/itemtype/all");
+    return await this._http.get(url).toPromise();
+  }
+
+  async getCustomerTypeListAll() {
+    let url = this._completeUrl("order/customertype/all");
+    return await this._http.get(url).toPromise();
+  }
+
 }

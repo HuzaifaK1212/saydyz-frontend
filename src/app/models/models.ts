@@ -1,6 +1,8 @@
-export class Type {
-  value? : number;
-  displayValue? : string;
+
+export class CustomerType {
+  id? : number;
+  code? : string;
+  name? : string;
 }
 
 export class Icicle {
@@ -20,6 +22,7 @@ export class OrderItems {
   quantity?: string;
   price? : string;
   flavorId?: number;
+  flavor? : Flavor;
   isPromo? : boolean = false;
 }
 
@@ -29,6 +32,7 @@ export class Order {
   createdOn? : string;
   customer? : Customer;
   channelId? : number;
+  channel? : Channel;
   totalPrice? : string;
   discount? : string;
   deliveryCharge? : string;
@@ -41,8 +45,10 @@ export class Customer {
   gender? : string;
   address? : string;
   areaId? : number;
+  area? : Area;
   phoneNo? : string;
   customerTypeId? : number;
+  customerType? : CustomerType;
 }
 
 export class Area {
@@ -55,4 +61,18 @@ export class Channel {
   id? : number;
   code? : string;
   name? : string;
+}
+
+export class ItemType {
+  id? : number;
+  code? : string;
+  name? : string;
+}
+
+export class Flavor {
+  id? : number;
+  name? : string;
+  code? : string;
+  price? : number;
+  itemType? : ItemType;
 }

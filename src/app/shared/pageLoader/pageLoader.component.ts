@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { LogService } from '../base/log.service';
-import { UIService } from '../ui/ui.service';
+import { LogService } from '../../services/base/log.service';
+import { UIService } from '../../services/ui/ui.service';
 
 
 @Component({

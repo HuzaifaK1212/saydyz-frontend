@@ -15,8 +15,8 @@ import { CommonModule } from '@angular/common';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { OrderService } from './services/order/order.service';
 import { HttpClientModule } from '@angular/common/http';
-import { ServiceModule } from './service.module';
-import { PageLoaderComponent } from './services/pageLoader/pageLoader.component';
+import { ServiceModule } from './services/service.module';
+import { PageLoaderComponent } from './shared/pageLoader/pageLoader.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { OrderListComponent } from './pages/order/order-list/order-list.component';
 import { MatTableModule } from '@angular/material/table';
@@ -25,13 +25,15 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { SharedModule } from './shared/shared.module';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PhoneSearchComponent } from './pages/dialog/phone-search/phone-search.component';
+import { MaterialModule } from './shared/material/material.module';
+import { OrderAddComponent } from './pages/order/order.add/order.add.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PageLoaderComponent,
     OrderListComponent,
     PhoneSearchComponent,
+    OrderAddComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,24 +41,14 @@ import { PhoneSearchComponent } from './pages/dialog/phone-search/phone-search.c
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatSelectModule,
-    MatButtonModule,
-    MatGridListModule,
     ServiceModule,
-    MatTabsModule,
-    MatTableModule,
-    MatIconModule,
     NgxMaskModule.forRoot(),
     SharedModule,
-    MatDialogModule
+
   ],
   exports: [
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ServiceModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

@@ -63,6 +63,7 @@ export class PhoneSearchComponent implements OnInit {
 
   expandedElement: any;
   isExpansionDetailRow = (i: number, row: Object) => true;
+  phoneno = "";
 
   constructor(
     public dialog: MatDialog,
@@ -70,8 +71,11 @@ export class PhoneSearchComponent implements OnInit {
     private _logService : LogService,
     private _orderService : OrderService,
     private _mappingService : MappingService,
-    private _uiService : UIService
-  ) {}
+    private _uiService : UIService,
+    @Inject(MAT_DIALOG_DATA) public data : any
+  ) {
+    this.phoneno = data.phoneno;
+  }
 
 
   onNoClick(): void {
@@ -80,6 +84,7 @@ export class PhoneSearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCustomOrderList();
+    this._logService.logMessage("Inside OnIT Dialog")
   }
 
   async loadCustomOrderList() {
@@ -92,7 +97,7 @@ export class PhoneSearchComponent implements OnInit {
     this.dataSource = new MatTableDataSource<Order>(this.orderList);
 
     try {
-      let res: any = await this._orderService.getOrderListAll();
+      let res: any = await this._orderService.getOrdersViaCustomerPhoneNo(this.phoneno);
 
       this.isSpinner = false;
       // this._logService.logMessage("success res: ");
@@ -107,7 +112,7 @@ export class PhoneSearchComponent implements OnInit {
         oList.push(o);
       }
       this.orderList = oList;
-
+      this._logService.logMessage(this.orderList);
       // this._logService.logMessage("orderList: ");
       // this._logService.logResponse(this.orderList);
 

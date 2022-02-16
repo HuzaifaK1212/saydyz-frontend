@@ -77,21 +77,17 @@ export class UIService {
      */
     showToast(msg: Message, type: string) {
 
-        this._logService.logMessage("showToast")
-        this._logService.logMessage(msg)
         // this._logService.logMessage(msg)
         // this._logService.logMessage("type")
         // this._logService.logMessage(type)
         //  this.toastStatus.next(msg);
         if (type === 'info') {
-          this._logService.logMessage("in info")
             msg.iconType = 'info';
             this.infoToastStatus.next(msg);
         } else if (type === 'notification') {
             msg.iconType = 'info';
             this.notificationToastStatus.next(msg);
         } else {
-
             // this._logService.logMessage("else ")
             msg.iconType = 'error';
             this.toastStatus.next(msg);
